@@ -1,0 +1,4 @@
+# Netlify SPA fallback — lets /menu/12 (table-QR URLs) resolve to the app
+# instead of 404ing. Ignored by other hosts; adjust the equivalent config
+# if deploying elsewhere (Vercel handles this automatically for Vite apps).
+/*  /index.html  200

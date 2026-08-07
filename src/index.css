@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes sheetUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.sheet-anim { animation: sheetUp 0.32s cubic-bezier(0.32, 0.72, 0, 1); }
+.overlay-anim { animation: fadeIn 0.2s ease; }
+.slide-anim { animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1); }
+.toast-anim { animation: slideUp 0.25s ease, fadeIn 0.2s ease; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin { animation: spin 0.8s linear infinite; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Very light "floating" drift for the hero's decorative chilies — a slow
+   sway, not a spin. Each pepper sets its own --dx/--dy/--dur/--delay via
+   inline style, so this one rule drives all of them without needing a
+   keyframe per instance. Uses the standalone `translate`/`rotate` CSS
+   properties (not `transform`) specifically so this animation only ever
+   touches position, leaving each pepper's own base rotation alone. */
+@keyframes chiliDrift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: var(--dx, 6px) var(--dy, 8px); }
+}
+.chili-drift {
+  animation: chiliDrift var(--dur, 7s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .chili-drift { animation: none; }
+}
+
+/* Use the STABLE (small) viewport height, not the dynamic one. iOS/Android
+   address bars hide and show while the person scrolls; "100dvh" changes
+   live as that happens, which reflows the whole page mid-scroll and is
+   exactly what made scrolling feel like it "fights back" and snaps up.
+   "100svh" is fixed to the smallest the viewport ever is, so this section's
+   height never changes once it has rendered. */
+.hero-viewport { min-height: 100vh; }
+@supports (min-height: 100svh) {
+  .hero-viewport { min-height: 100svh; }
+}
+
+* { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, "SF Pro Display", "Oriya MN", BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: #F9F8F6;
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
