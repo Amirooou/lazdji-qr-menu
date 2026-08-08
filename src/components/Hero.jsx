@@ -46,16 +46,16 @@ export default function Hero({ onScrollToMenu }) {
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
       >
-        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (увеличен до 280px) */}
+        {/* ПЕРЕЦ — ВЕРХНИЙ ПРАВЫЙ УГОЛ (крупный, жёстко в угол) */}
         {chiliDried && (
           <img
             src={chiliDried}
             alt=""
             style={{
               position: "absolute",
-              top: "-45px",
+              top: "-60px",
               right: "-70px",
-              width: "280px",
+              width: "360px",
               transform: "rotate(-110deg)",
               filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
               opacity: 0.95,
@@ -65,16 +65,16 @@ export default function Hero({ onScrollToMenu }) {
           />
         )}
 
-        {/* ПЕРЕЦ 2: НИЖНИЙ ЛЕВЫЙ (увеличен до 340px) */}
+        {/* ПЕРЕЦ — НИЖНИЙ ЛЕВЫЙ УГОЛ (крупный, жёстко в угол) */}
         {chiliLong && (
           <img
             src={chiliLong}
             alt=""
             style={{
               position: "absolute",
-              bottom: "90px",
-              left: "-70px",
-              width: "340px",
+              bottom: "40px",
+              left: "-80px",
+              width: "400px",
               transform: "rotate(35deg)",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
               opacity: 0.95,
@@ -83,6 +83,27 @@ export default function Hero({ onScrollToMenu }) {
             }}
           />
         )}
+
+        {/*
+          ВЕРХНИЙ ЛЕВЫЙ УГОЛ — сюда добавите свою картинку сами.
+          Пример, просто раскомментируйте и вставьте свой импорт:
+
+          <img
+            src={yourTopLeftImage}
+            alt=""
+            style={{
+              position: "absolute",
+              top: "-60px",
+              left: "-70px",
+              width: "360px",
+              transform: "rotate(110deg)", // подберите угол под свою картинку
+              filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
+              opacity: 0.95,
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          />
+        */}
 
         {/* ЦЕНТРАЛЬНЫЙ БЛОК */}
         <div
@@ -98,9 +119,9 @@ export default function Hero({ onScrollToMenu }) {
             textAlign: "center",
           }}
         >
-          {/* ЛОГОТИП WORDMARK */}
-          <div style={{ position: "relative", marginBottom: 20 }}>
-            <Wordmark size={85} />
+          {/* ЛОГОТИП — огромный, дерзкий */}
+          <div style={{ position: "relative", marginBottom: 24 }}>
+            <Wordmark size={150} />
           </div>
 
           <div style={{ position: "relative", marginBottom: 32, display: "flex", alignItems: "center", gap: 12 }}>
@@ -120,7 +141,6 @@ export default function Hero({ onScrollToMenu }) {
               {t("tagline")}
             </p>
 
-            {/* ПЕРЕЦ 3: МЕЛКИЙ АКЦЕНТНЫЙ (не менял) */}
             {chiliHabanero && (
               <img
                 src={chiliHabanero}
