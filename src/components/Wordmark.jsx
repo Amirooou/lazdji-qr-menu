@@ -1,8 +1,9 @@
-import logoSvg from "../assets/logo-wordmark.svg";
-
-// The real brand wordmark — gold/bronze gradient "LAZDJI" with the flame+
-// chili icon standing in for the "J", exactly as designed. `size` controls
-// the rendered height; width follows the source image's own aspect ratio.
 export default function Wordmark({ size = 27 }) {
-  return <img src={logoSvg} alt="LAZDJI" style={{ height: size, width: "auto", display: "block" }} />;
+  return (
+    <img 
+      src="/logo-wordmark.svg" 
+      alt="LAZDJI" 
+      style={{ height: size, width: "auto", display: "block" }} 
+    />
+  );
 }
