@@ -5,7 +5,7 @@ import ServiceFeeModal from "./ServiceFeeModal";
 import Wordmark from "./Wordmark";
 import ContactLinks from "./ContactLinks";
 // Добавляем новые ассеты: chiliFan (7 перцев) и chiliPair (парочка)
-import { chiliLong, chiliHabanero, chiliDried, chiliFan, chiliPair } from "../assets/chiliAssets";
+import { chiliLong, chiliHabanero, chiliDried } from "../assets/chiliAssets";
 import { GOLD, CREAM } from "../theme"; // DARK_LEATHER пока не используем
 
 export default function Hero({ onScrollToMenu }) {
