@@ -4,5 +4,5 @@ import logoSvg from "../assets/logo-wordmark.svg";
 // chili icon standing in for the "J", exactly as designed. `size` controls
 // the rendered height; width follows the source image's own aspect ratio.
 export default function Wordmark({ size = 27 }) {
-  return <img src={logoWordmark} alt="LAZDJI" style={{ height: size, width: "auto", display: "block" }} />;
+  return <img src={logoSvg} alt="LAZDJI" style={{ height: size, width: "auto", display: "block" }} />;
 }
