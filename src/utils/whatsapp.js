@@ -3,7 +3,7 @@ import { lineUnitPrice, lineTotal } from "./cartMath";
 
 // TODO: replace with the restaurant's real WhatsApp business number
 // (digits only, country code, no "+" or spaces — e.g. "77011234567").
-export const WHATSAPP_NUMBER = "77XXXXXXXXX";
+export const WHATSAPP_NUMBER = "77024986338";
 
 export const ORDER_TYPES = ["delivery", "pickup", "reservation"];
 
