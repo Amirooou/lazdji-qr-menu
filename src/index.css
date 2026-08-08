@@ -29,6 +29,32 @@
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__pepper {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  width: clamp(60px, 18vw, 80px);
+  height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.85));
+}
+
+.hero__pepper--top-left {
+  top: 0;
+  left: 0;
+}
+
+.hero__pepper--bottom-right {
+  bottom: 0;
+  right: 0;
+  filter: drop-shadow(10px 20px 30px rgba(0, 0, 0, 0.9));
+}
+
 /* Very light "floating" drift for the hero's decorative chilies — a slow
    sway, not a spin. Each pepper sets its own --dx/--dy/--dur/--delay via
    inline style, so this one rule drives all of them without needing a

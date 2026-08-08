@@ -34,9 +34,8 @@ export default function Hero({ onScrollToMenu }) {
       }}
     >
       <div
-        className="hero-viewport"
+        className="hero hero-viewport"
         style={{
-          position: "relative",
           width: "100%",
           maxWidth: "480px",
           height: "100vh",
@@ -44,7 +43,6 @@ export default function Hero({ onScrollToMenu }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          overflow: "hidden",
           background: "transparent",
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
@@ -81,16 +79,9 @@ export default function Hero({ onScrollToMenu }) {
             src={chiliDried}
             alt=""
             style={{
-              position: "absolute",
-              top: "-20px",
-              right: "-35px",
-              width: "230px",
               transform: "rotate(-115deg)",
-              filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
-              opacity: 0.95,
-              pointerEvents: "none",
-              zIndex: 1,
             }}
+            className="hero__pepper hero__pepper--top-left"
           />
         )}
 
@@ -100,16 +91,9 @@ export default function Hero({ onScrollToMenu }) {
             src={chiliLong}
             alt=""
             style={{
-              position: "absolute",
-              bottom: "105px",
-              left: "-40px",
-              width: "270px",
               transform: "rotate(30deg)",
-              filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
-              opacity: 0.95,
-              pointerEvents: "none",
-              zIndex: 1,
             }}
+            className="hero__pepper hero__pepper--bottom-right"
           />
         )}
 
@@ -139,7 +123,7 @@ export default function Hero({ onScrollToMenu }) {
               marginBottom: 16,
             }}
           >
-            <Wordmark size={110} />
+            <Wordmark size={260} style={{ width: "70%", maxWidth: "260px" }} />
           </div>
 
           <div
