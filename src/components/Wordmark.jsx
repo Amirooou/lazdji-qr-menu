@@ -1,14 +1,20 @@
 import logoFile from "../assets/logo-wordmark.svg";
-// ⚠️ Проверьте в VS Code папку src/assets/ — если у вас файл называется
-// logo-wordmark.svg, а не .png, поменяйте расширение в строке импорта выше
-// на то, что реально лежит в папке. Иначе сборка не найдёт файл.
 
-export default function Wordmark({ size = 32 }) {
+export default function Wordmark({ size = 110, style = {} }) {
   return (
     <img
       src={logoFile}
       alt="LAZDJI"
-      style={{ height: size, width: "auto", objectFit: "contain", display: "block" }}
+      style={{
+        width: "100%",
+        maxWidth: "340px", // Максимальная ширина, чтобы не вылезать за экран телефона
+        height: "auto",
+        maxHeight: `${size}px`,
+        objectFit: "contain",
+        display: "block",
+        margin: "0 auto", // Железобетонный центр
+        ...style,
+      }}
     />
   );
 }

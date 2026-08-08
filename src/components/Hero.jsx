@@ -7,6 +7,9 @@ import ContactLinks from "./ContactLinks";
 import { chiliLong, chiliHabanero, chiliDried } from "../assets/chiliAssets";
 import { GOLD, CREAM } from "../theme";
 
+// Если 7 перчиков уже лежит в assets, раскомментируй строку ниже и измени имя файла:
+// import chili7 from "../assets/chili_pile.png"; 
+
 export default function Hero({ onScrollToMenu }) {
   const { t } = useApp();
   const [showFee, setShowFee] = useState(false);
@@ -46,17 +49,43 @@ export default function Hero({ onScrollToMenu }) {
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
       >
-        {/* ПЕРЕЦ — ВЕРХНИЙ ПРАВЫЙ УГОЛ (крупный, жёстко в угол) */}
+        {/* ========================================================= */}
+        {/* 1. ВЕРХНИЙ ЛЕВЫЙ УГОЛ (МЕСТО ДЛЯ 7 ПЕРЧИКОВ)              */}
+        {/* Чтобы вставить:                                           */}
+        {/* 1) Заимпортируй картинку вверху файла                   */}
+        {/* 2) Раскомментируй этот блок {chili7 && ...}              */}
+        {/* ========================================================= */}
+        {/*
+        {chili7 && (
+          <img
+            src={chili7}
+            alt=""
+            style={{
+              position: "absolute",
+              top: "-10px",
+              left: "-20px",
+              width: "220px",
+              transform: "rotate(10deg)",
+              filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
+              opacity: 0.95,
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          />
+        )}
+        */}
+
+        {/* 2. ВЕРХНИЙ ПРАВЫЙ УГОЛ (Большой сушеный перец) */}
         {chiliDried && (
           <img
             src={chiliDried}
             alt=""
             style={{
               position: "absolute",
-              top: "-60px",
-              right: "-70px",
-              width: "360px",
-              transform: "rotate(-110deg)",
+              top: "-20px",
+              right: "-35px",
+              width: "230px",
+              transform: "rotate(-115deg)",
               filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
               opacity: 0.95,
               pointerEvents: "none",
@@ -65,17 +94,17 @@ export default function Hero({ onScrollToMenu }) {
           />
         )}
 
-        {/* ПЕРЕЦ — НИЖНИЙ ЛЕВЫЙ УГОЛ (крупный, жёстко в угол) */}
+        {/* 3. НИЖНИЙ ЛЕВЫЙ УГОЛ (Большой длинный перец) */}
         {chiliLong && (
           <img
             src={chiliLong}
             alt=""
             style={{
               position: "absolute",
-              bottom: "40px",
-              left: "-80px",
-              width: "400px",
-              transform: "rotate(35deg)",
+              bottom: "105px",
+              left: "-40px",
+              width: "270px",
+              transform: "rotate(30deg)",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
               opacity: 0.95,
               pointerEvents: "none",
@@ -83,27 +112,6 @@ export default function Hero({ onScrollToMenu }) {
             }}
           />
         )}
-
-        {/*
-          ВЕРХНИЙ ЛЕВЫЙ УГОЛ — сюда добавите свою картинку сами.
-          Пример, просто раскомментируйте и вставьте свой импорт:
-
-          <img
-            src={yourTopLeftImage}
-            alt=""
-            style={{
-              position: "absolute",
-              top: "-60px",
-              left: "-70px",
-              width: "360px",
-              transform: "rotate(110deg)", // подберите угол под свою картинку
-              filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
-              opacity: 0.95,
-              pointerEvents: "none",
-              zIndex: 1,
-            }}
-          />
-        */}
 
         {/* ЦЕНТРАЛЬНЫЙ БЛОК */}
         <div
@@ -115,22 +123,42 @@ export default function Hero({ onScrollToMenu }) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "40px 24px 0",
+            padding: "20px 20px 0",
             textAlign: "center",
+            width: "100%",
+            boxSizing: "border-box",
           }}
         >
-          {/* ЛОГОТИП — огромный, дерзкий */}
-          <div style={{ position: "relative", marginBottom: 24 }}>
-            <Wordmark size={150} />
+          {/* ЛОГОТИП — Идеальный центр, максимальный размер */}
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: 16,
+            }}
+          >
+            <Wordmark size={110} />
           </div>
 
-          <div style={{ position: "relative", marginBottom: 32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div
+            style={{
+              position: "relative",
+              marginBottom: 28,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+              width: "100%",
+            }}
+          >
             <p
               style={{
                 color: GOLD,
-                fontSize: 14,
+                fontSize: 13,
                 letterSpacing: "0.08em",
-                lineHeight: 1.5,
+                lineHeight: 1.4,
                 margin: 0,
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -146,11 +174,12 @@ export default function Hero({ onScrollToMenu }) {
                 src={chiliHabanero}
                 alt=""
                 style={{
-                  width: "36px",
-                  height: "36px",
+                  width: "32px",
+                  height: "32px",
                   filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.6))",
                   transform: "rotate(-10deg)",
                   opacity: 0.95,
+                  flexShrink: 0,
                 }}
               />
             )}
