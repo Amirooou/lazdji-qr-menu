@@ -7,7 +7,7 @@ export default function Wordmark({ size = 32 }) {
       src={logoPng} 
       alt="LAZDJI" 
       // Укажи здесь width в 2 раза меньше, чем реальный размер файла
-      style={{ height: size, width: "160px", objectFit: "contain", display: "block" }} 
+      style={{ height: size, width: "200px", objectFit: "contain", display: "block" }} 
     />
   );
 }
