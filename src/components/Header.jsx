@@ -34,7 +34,7 @@ export default function Header() {
           onTouchEnd={endPress}
           style={{ flex: 1, display: "flex", justifyContent: "center", userSelect: "none" }}
         >
-          <Wordmark size={26} />
+          <Wordmark size={32} />
         </div>
 
         {/* Переключатель языка KZ / RU */}

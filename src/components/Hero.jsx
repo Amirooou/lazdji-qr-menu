@@ -5,7 +5,7 @@ import ServiceFeeModal from "./ServiceFeeModal";
 import Wordmark from "./Wordmark";
 import ContactLinks from "./ContactLinks";
 import { chiliLong, chiliHabanero, chiliDried } from "../assets/chiliAssets";
-import { GOLD, CREAM, DARK_LEATHER } from "../theme";
+import { GOLD, CREAM } from "../theme";
 
 export default function Hero({ onScrollToMenu }) {
   const { t } = useApp();
@@ -23,12 +23,11 @@ export default function Hero({ onScrollToMenu }) {
       style={{
         width: "100%",
         minHeight: "100vh",
-        // ДЕСКТОП: Тот же премиальный градиент на весь экран, а не черный фон
         background: "radial-gradient(circle at 50% 40%, #4D0A12 0%, #1A0205 60%, #0D0001 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        overflow: "hidden", // Защита от вылетов перцев за экран
+        overflow: "hidden",
       }}
     >
       <div
@@ -38,45 +37,44 @@ export default function Hero({ onScrollToMenu }) {
           width: "100%",
           maxWidth: "480px",
           height: "100vh",
-          maxHeight: "930px", // Защита от супервысоких мониторов
+          maxHeight: "930px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          overflow: "hidden", // Внутренний скролл только для фрейма
-          background: "transparent", // Фрейм прозрачный, фон берем от родителя
-          // Элегантная глубокая тень, выделяющая мобильный фрейм на десктопе
+          overflow: "hidden",
+          background: "transparent",
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
       >
-        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (Создает рамку сверху) */}
+        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (Увеличили до 210px) */}
         {chiliDried && (
           <img
             src={chiliDried}
             alt=""
             style={{
               position: "absolute",
-              top: "-20px",
-              right: "-40px",
-              width: "160px",
+              top: "-25px",
+              right: "-45px",
+              width: "210px", // было 160px
               transform: "rotate(-110deg)",
               filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
-              opacity: 0.9,
+              opacity: 0.95,
               pointerEvents: "none",
               zIndex: 1,
             }}
           />
         )}
 
-        {/* ПЕРЕЦ 2: НИЖНИЙ ЛЕВЫЙ (Изначальный, создаёт глубину) */}
+        {/* ПЕРЕЦ 2: НИЖНИЙ ЛЕВЫЙ (Увеличили до 260px) */}
         {chiliLong && (
           <img
             src={chiliLong}
             alt=""
             style={{
               position: "absolute",
-              bottom: "125px",
-              left: "-35px",
-              width: "210px",
+              bottom: "110px",
+              left: "-45px",
+              width: "260px", // было 210px
               transform: "rotate(35deg)",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
               opacity: 0.95,
@@ -100,16 +98,16 @@ export default function Hero({ onScrollToMenu }) {
             textAlign: "center",
           }}
         >
-          {/* ПЕРЕЦ 3: АКЦЕНТНЫЙ У ПОДЗАГОЛОВКА (Дядя доволен) */}
-          <div style={{ position: "relative", marginBottom: 18 }}>
-            <Wordmark size={68} />
+          {/* ЛОГОТИП WORDMARK (Увеличили size с 68 до 85) */}
+          <div style={{ position: "relative", marginBottom: 20 }}>
+            <Wordmark size={85} />
           </div>
 
           <div style={{ position: "relative", marginBottom: 32, display: "flex", alignItems: "center", gap: 12 }}>
             <p
               style={{
                 color: GOLD,
-                fontSize: 13,
+                fontSize: 14,
                 letterSpacing: "0.08em",
                 lineHeight: 1.5,
                 margin: 0,
@@ -122,16 +120,17 @@ export default function Hero({ onScrollToMenu }) {
               {t("tagline")}
             </p>
             
+            {/* ПЕРЕЦ 3: МЕЛКИЙ АКЦЕНТНЫЙ (Увеличили до 36px) */}
             {chiliHabanero && (
               <img
                 src={chiliHabanero}
                 alt=""
                 style={{
-                  width: "28px",
-                  height: "28px",
+                  width: "36px", // было 28px
+                  height: "36px",
                   filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.6))",
                   transform: "rotate(-10deg)",
-                  opacity: 0.9
+                  opacity: 0.95
                 }}
               />
             )}
@@ -173,7 +172,6 @@ export default function Hero({ onScrollToMenu }) {
             position: "relative",
             zIndex: 3,
             padding: "24px 24px 32px",
-            // Мягкий плавный переход к доминантной темной панели
             background:
               "linear-gradient(180deg, rgba(10,1,2,0) 0%, rgba(10,1,2,0.98) 35%, #030000 100%)",
             display: "flex",
