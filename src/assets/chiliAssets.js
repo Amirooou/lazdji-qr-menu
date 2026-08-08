@@ -1,9 +1,9 @@
 /**
  * Real chili/pepper photos for the hero's decorative edges.
  */
-import chiliLong from "./chili_long.png";
+import chiliLong from "./chili_long.svg";
 import chiliHabanero from "./chili_habanero.png";
-import chiliDried from "./chili_dried.png";
+import chiliDried from "./chili_dried.svg";
 import chiliDriedDark from "./chili_dried_dark.png";
 import chiliSingle from "./chili_single.png";
 import chiliCluster from "./chili_cluster.png";

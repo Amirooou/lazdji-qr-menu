@@ -1,5 +1,5 @@
 // Измени на имя своего PNG файла логотипа (например, logo-icon.png)
-import logoPng from "../assets/logo-wordmark.png";
+import logoPng from "../assets/logo-wordmark.svg";
 
 export default function Wordmark({ size = 32 }) {
   return (
