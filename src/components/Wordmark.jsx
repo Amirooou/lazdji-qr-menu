@@ -1,4 +1,4 @@
-import logoFile from "../assets/logo-wordmark.svg";
+import logoFile from "../assets/logonew.png";
 
 export default function Wordmark({ size = 220, style = {} }) {
   return (
