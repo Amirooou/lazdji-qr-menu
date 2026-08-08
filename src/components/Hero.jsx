@@ -5,7 +5,7 @@ import ServiceFeeModal from "./ServiceFeeModal";
 import Wordmark from "./Wordmark";
 import ContactLinks from "./ContactLinks";
 import { chiliLong, chiliHabanero, chiliDried } from "../assets/chiliAssets";
-import { GOLD, CREAM } from "../theme"; // DARK_LEATHER пока не используем
+import { GOLD, CREAM } from "../theme";
 
 export default function Hero({ onScrollToMenu }) {
   const { t } = useApp();
@@ -23,7 +23,6 @@ export default function Hero({ onScrollToMenu }) {
       style={{
         width: "100%",
         minHeight: "100vh",
-        // ЦВЕТ ГРАНАТОВОГО СОКА: Изменили темно-бордовый на насыщенный винный (#8F1E33) в центре
         background: "radial-gradient(circle at 50% 40%, #8F1E33 0%, #31070B 60%, #0D0001 100%)",
         display: "flex",
         justifyContent: "center",
@@ -47,16 +46,17 @@ export default function Hero({ onScrollToMenu }) {
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
       >
-        {/* ПЕРЕЦ 1 (Existing): ВЕРХНИЙ ПРАВЫЙ (Создает рамку сверху) */}
+        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (Резиновый размер, не вылезает за рамки) */}
         {chiliDried && (
           <img
             src={chiliDried}
             alt=""
             style={{
               position: "absolute",
-              top: "-15px", // Чуть подправили позицию
-              right: "-30px",
-              width: "150px",
+              top: "-10px",
+              right: "-20px",
+              width: "clamp(90px, 25vw, 125px)",
+              height: "auto",
               transform: "rotate(-110deg)",
               filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
               opacity: 0.9,
@@ -66,16 +66,17 @@ export default function Hero({ onScrollToMenu }) {
           />
         )}
 
-        {/* ПЕРЕЦ 2 (Existing): ПЕРЕМЕЩЕН Чуть выше, чтобы не конфликтовать с доком */}
+        {/* ПЕРЕЦ 2: ЛЕВЫЙ НИЖНИЙ (Привязан через %, не перекрывает нижнюю панель) */}
         {chiliLong && (
           <img
             src={chiliLong}
             alt=""
             style={{
               position: "absolute",
-              bottom: "220px", // Подняли выше (было 125px)
-              left: "-30px",
-              width: "180px",
+              bottom: "26%",
+              left: "-25px",
+              width: "clamp(100px, 28vw, 135px)",
+              height: "auto",
               transform: "rotate(30deg)",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
               opacity: 0.9,
@@ -95,15 +96,15 @@ export default function Hero({ onScrollToMenu }) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "40px 24px 0", // Оставляем паддинг сверху для 7 перцев
+            padding: "20px 24px 0",
             textAlign: "center",
           }}
         >
           <div style={{ position: "relative", marginBottom: 18, zIndex: 2 }}>
-            <Wordmark size={68} />
+            <Wordmark size={72} />
           </div>
 
-          <div style={{ position: "relative", marginBottom: 32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ position: "relative", marginBottom: 28, display: "flex", alignItems: "center", gap: 10 }}>
             <p
               style={{
                 color: GOLD,
@@ -125,8 +126,8 @@ export default function Hero({ onScrollToMenu }) {
                 src={chiliHabanero}
                 alt=""
                 style={{
-                  width: "28px",
-                  height: "28px",
+                  width: "24px",
+                  height: "24px",
                   filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.6))",
                   transform: "rotate(-10deg)",
                   opacity: 0.9
@@ -171,7 +172,6 @@ export default function Hero({ onScrollToMenu }) {
             position: "relative",
             zIndex: 3,
             padding: "24px 24px 32px",
-            // Градиент более плавный к фону (винному), а не черному
             background:
               "linear-gradient(180deg, rgba(10,1,2,0) 0%, rgba(13,0,1,0.9) 35%, #030000 100%)",
             display: "flex",
@@ -188,7 +188,7 @@ export default function Hero({ onScrollToMenu }) {
               width: "100%",
               padding: "16px 0",
               borderRadius: "16px",
-              background: "linear-gradient(180deg, #3D0A11 0%, #1A0205 100%)", // Изменили #2A на #3D для соответствия фону
+              background: "linear-gradient(180deg, #3D0A11 0%, #1A0205 100%)",
               color: CREAM,
               fontSize: 14,
               fontWeight: 700,
