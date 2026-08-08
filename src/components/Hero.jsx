@@ -4,7 +4,6 @@ import { useApp } from "../context/AppContext";
 import ServiceFeeModal from "./ServiceFeeModal";
 import Wordmark from "./Wordmark";
 import ContactLinks from "./ContactLinks";
-// Добавляем новые ассеты: chiliFan (7 перцев) и chiliPair (парочка)
 import { chiliLong, chiliHabanero, chiliDried } from "../assets/chiliAssets";
 import { GOLD, CREAM } from "../theme"; // DARK_LEATHER пока не используем
 
@@ -100,21 +99,6 @@ export default function Hero({ onScrollToMenu }) {
             textAlign: "center",
           }}
         >
-          {/* НОВЫЙ БЛОК: 7 ПЕРЦЕВ «КОРОНОЙ» НАД ЛОГОТИПОМ */}
-          {chiliFan && (
-            <img
-              src={chiliFan}
-              alt=""
-              style={{
-                width: "220px", // Ширина, соразмерная логотипу
-                marginBottom: "-20px", // Наплыв на логотип для бесшовности
-                filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.8))",
-                opacity: 0.95,
-                zIndex: 1,
-              }}
-            />
-          )}
-
           <div style={{ position: "relative", marginBottom: 18, zIndex: 2 }}>
             <Wordmark size={68} />
           </div>
@@ -196,23 +180,6 @@ export default function Hero({ onScrollToMenu }) {
             gap: 20,
           }}
         >
-          {/* НОВЫЙ БЛОК: ПАРОЧКА ЧИЛИ, ЛЕЖАЩИЕ ДРУГ НА ДРУГЕ */}
-          {chiliPair && (
-            <img
-              src={chiliPair}
-              alt=""
-              style={{
-                width: "160px", // Аккуратный размер, чтобы не перекрывать ссылки
-                transform: "rotate(-15deg)", // Небольшой естественный наклон
-                filter: "drop-shadow(0 6px 15px rgba(0,0,0,0.8))",
-                opacity: 0.95,
-                marginTop: "-10px", // Чуть поднять, чтобы были надContactLinks
-                marginBottom: "5px",
-                zIndex: 1,
-              }}
-            />
-          )}
-
           <ContactLinks />
 
           <button
