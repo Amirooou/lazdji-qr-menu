@@ -46,16 +46,16 @@ export default function Hero({ onScrollToMenu }) {
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
       >
-        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (Резиновый размер, не вылезает за рамки) */}
+        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ УГОЛ */}
         {chiliDried && (
           <img
             src={chiliDried}
             alt=""
             style={{
               position: "absolute",
-              top: "-10px",
-              right: "-20px",
-              width: "clamp(90px, 25vw, 125px)",
+              top: "10px",
+              right: "10px",
+              width: "100px",
               height: "auto",
               transform: "rotate(-110deg)",
               filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
@@ -66,16 +66,16 @@ export default function Hero({ onScrollToMenu }) {
           />
         )}
 
-        {/* ПЕРЕЦ 2: ЛЕВЫЙ НИЖНИЙ (Привязан через %, не перекрывает нижнюю панель) */}
+        {/* ПЕРЕЦ 2: ЛЕВЫЙ НИЖНИЙ УГОЛ */}
         {chiliLong && (
           <img
             src={chiliLong}
             alt=""
             style={{
               position: "absolute",
-              bottom: "26%",
-              left: "-25px",
-              width: "clamp(100px, 28vw, 135px)",
+              bottom: "130px",
+              left: "10px",
+              width: "110px",
               height: "auto",
               transform: "rotate(30deg)",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
@@ -100,8 +100,9 @@ export default function Hero({ onScrollToMenu }) {
             textAlign: "center",
           }}
         >
-          <div style={{ position: "relative", marginBottom: 18, zIndex: 2 }}>
-            <Wordmark size={72} />
+          {/* ЛОГОТИП (size=240 делает его крупным и четким) */}
+          <div style={{ position: "relative", marginBottom: 18, zIndex: 2, width: "100%" }}>
+            <Wordmark size={240} />
           </div>
 
           <div style={{ position: "relative", marginBottom: 28, display: "flex", alignItems: "center", gap: 10 }}>

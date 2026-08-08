@@ -1,18 +1,17 @@
 import logoFile from "../assets/logo-wordmark.svg";
 
-export default function Wordmark({ size = 110, style = {} }) {
+export default function Wordmark({ size = 220, style = {} }) {
   return (
     <img
       src={logoFile}
       alt="LAZDJI"
       style={{
         width: "100%",
-        maxWidth: "340px", // Максимальная ширина, чтобы не вылезать за экран телефона
+        maxWidth: typeof size === "number" ? `${size}px` : size,
         height: "auto",
-        maxHeight: `${size}px`,
         objectFit: "contain",
         display: "block",
-        margin: "0 auto", // Железобетонный центр
+        margin: "0 auto",
         ...style,
       }}
     />
