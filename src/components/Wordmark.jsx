@@ -1,4 +1,4 @@
-import logoWordmark from "../assets/logo-wordmark.png";
+import logoWordmark from "./logo-wordmark.svg";
 
 // The real brand wordmark — gold/bronze gradient "LAZDJI" with the flame+
 // chili icon standing in for the "J", exactly as designed. `size` controls

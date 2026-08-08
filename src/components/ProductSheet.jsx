@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, Minus, Plus, Check } from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { extras } from "../data/extras";
@@ -13,6 +13,14 @@ export default function ProductSheet({ item, onClose }) {
   const [qty, setQty] = useState(1);
   const [pi, setPi] = useState(0);
   const [ex, setEx] = useState([]);
+
+  // Блокируем скролл основного меню, пока открыта карточка товара
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   if (!item) return null;
 
@@ -42,7 +50,14 @@ export default function ProductSheet({ item, onClose }) {
           boxShadow: "0 -10px 40px rgba(0,0,0,0.9)",
         }}
       >
-        <div style={{ overflowY: "auto", maxHeight: "calc(92vh - 76px)" }}>
+        <div
+          style={{
+            overflowY: "auto",
+            maxHeight: "calc(92vh - 76px)",
+            overscrollBehavior: "contain",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
           {/* Верхняя плашка-свайп */}
           <div
             style={{
@@ -88,7 +103,7 @@ export default function ProductSheet({ item, onClose }) {
             <img src={item.photo} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
 
-          {/* Контент (Паддинг снизу под кнопку 80px) */}
+          {/* Контент */}
           <div style={{ padding: "16px 20px 80px" }}>
             <h2 style={{ fontSize: 22, fontWeight: 700, color: CREAM || "#fff", margin: 0 }}>{name}</h2>
             {desc && <p style={{ fontSize: 13, color: "rgba(245, 230, 211, 0.65)", margin: "8px 0 0", lineHeight: 1.5 }}>{desc}</p>}
