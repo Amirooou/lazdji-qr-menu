@@ -46,16 +46,16 @@ export default function Hero({ onScrollToMenu }) {
           boxShadow: "0 10px 60px rgba(0,0,0,0.8)",
         }}
       >
-        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (Увеличили до 210px) */}
+        {/* ПЕРЕЦ 1: ВЕРХНИЙ ПРАВЫЙ (увеличен до 280px) */}
         {chiliDried && (
           <img
             src={chiliDried}
             alt=""
             style={{
               position: "absolute",
-              top: "-25px",
-              right: "-45px",
-              width: "210px", // было 160px
+              top: "-45px",
+              right: "-70px",
+              width: "280px",
               transform: "rotate(-110deg)",
               filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.85))",
               opacity: 0.95,
@@ -65,16 +65,16 @@ export default function Hero({ onScrollToMenu }) {
           />
         )}
 
-        {/* ПЕРЕЦ 2: НИЖНИЙ ЛЕВЫЙ (Увеличили до 260px) */}
+        {/* ПЕРЕЦ 2: НИЖНИЙ ЛЕВЫЙ (увеличен до 340px) */}
         {chiliLong && (
           <img
             src={chiliLong}
             alt=""
             style={{
               position: "absolute",
-              bottom: "110px",
-              left: "-45px",
-              width: "260px", // было 210px
+              bottom: "90px",
+              left: "-70px",
+              width: "340px",
               transform: "rotate(35deg)",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.9))",
               opacity: 0.95,
@@ -98,7 +98,7 @@ export default function Hero({ onScrollToMenu }) {
             textAlign: "center",
           }}
         >
-          {/* ЛОГОТИП WORDMARK (Увеличили size с 68 до 85) */}
+          {/* ЛОГОТИП WORDMARK */}
           <div style={{ position: "relative", marginBottom: 20 }}>
             <Wordmark size={85} />
           </div>
@@ -119,18 +119,18 @@ export default function Hero({ onScrollToMenu }) {
             >
               {t("tagline")}
             </p>
-            
-            {/* ПЕРЕЦ 3: МЕЛКИЙ АКЦЕНТНЫЙ (Увеличили до 36px) */}
+
+            {/* ПЕРЕЦ 3: МЕЛКИЙ АКЦЕНТНЫЙ (не менял) */}
             {chiliHabanero && (
               <img
                 src={chiliHabanero}
                 alt=""
                 style={{
-                  width: "36px", // было 28px
+                  width: "36px",
                   height: "36px",
                   filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.6))",
                   transform: "rotate(-10deg)",
-                  opacity: 0.95
+                  opacity: 0.95,
                 }}
               />
             )}

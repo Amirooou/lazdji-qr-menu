@@ -1,13 +1,14 @@
-// Измени на имя своего PNG файла логотипа (например, logo-icon.png)
-import logoPng from "../assets/logo-wordmark.svg";
+import logoFile from "../assets/logo-wordmark.svg";
+// ⚠️ Проверьте в VS Code папку src/assets/ — если у вас файл называется
+// logo-wordmark.svg, а не .png, поменяйте расширение в строке импорта выше
+// на то, что реально лежит в папке. Иначе сборка не найдёт файл.
 
 export default function Wordmark({ size = 32 }) {
   return (
-    <img 
-      src={logoPng} 
-      alt="LAZDJI" 
-      // Укажи здесь width в 2 раза меньше, чем реальный размер файла
-      style={{ height: size, width: "200px", objectFit: "contain", display: "block" }} 
+    <img
+      src={logoFile}
+      alt="LAZDJI"
+      style={{ height: size, width: "auto", objectFit: "contain", display: "block" }}
     />
   );
 }
