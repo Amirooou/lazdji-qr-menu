@@ -2,7 +2,7 @@ import { Receipt } from "lucide-react";
 import clutchChilli from "../assets/clutchchilli.png";
 import logoWord from "../assets/logonew.png";
 import underLogo from "../assets/underlogo.png";
-import ornamentGold from "../assets/ornamentgold.jpg";
+import ornamentGold from "../assets/ornamentgold.png";
 import rightUzor from "../assets/right_uzor.png";
 import "./hero.css";
 
