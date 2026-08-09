@@ -7,6 +7,7 @@ import "./hero.css";
 export default function Hero({ onScrollToMenu }) {
   return (
     <section className="hero">
+
       <img
         src={clutchChilli}
         alt=""
@@ -18,24 +19,33 @@ export default function Hero({ onScrollToMenu }) {
       <div className="hero__smoke hero__smoke--right" aria-hidden="true" />
 
       <div className="hero__content">
+
         <img
           src={logoWord}
           alt="LAZDJI"
           className="hero__logo"
         />
 
-        <p className="hero__tagline">ВКУС ТРАДИЦИИ</p>
+        <p className="hero__tagline">
+          ВКУС ТРАДИЦИИ
+        </p>
 
         <div className="hero__accentRow" aria-hidden="true">
-          <img src={underLogo} alt="" className="hero__underlogoAsset" />
+          <img
+            src={underLogo}
+            alt=""
+            className="hero__underlogoAsset"
+          />
         </div>
-      </div>
 
-      <div className="hero__footer">
-        <button onClick={onScrollToMenu} className="hero__button">
+        <button
+          onClick={onScrollToMenu}
+          className="hero__button"
+        >
           <Receipt size={18} strokeWidth={2} />
           <span>СМОТРЕТЬ МЕНЮ</span>
         </button>
+
       </div>
 
     </section>
