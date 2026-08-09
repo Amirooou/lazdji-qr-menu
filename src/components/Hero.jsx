@@ -19,8 +19,7 @@ export default function Hero({ onScrollToMenu }) {
       <div className="hero__smoke hero__smoke--right" aria-hidden="true" />
 
       <div className="hero__corner hero__corner--right" aria-hidden="true">
-        <img src={clutchChilli} alt="" className="hero__cornerArt hero__cornerArt--desktop" />
-        <img src={rightUzor} alt="" className="hero__cornerArt hero__cornerArt--mobile" />
+        <img src={rightUzor} alt="" className="hero__cornerArt" />
       </div>
 
       <div className="hero__content">
@@ -44,12 +43,6 @@ export default function Hero({ onScrollToMenu }) {
         </button>
       </div>
 
-      <img
-        src={clutchChilli}
-        alt=""
-        aria-hidden="true"
-        className="hero__cluster hero__cluster--bottom"
-      />
     </section>
   );
 }
