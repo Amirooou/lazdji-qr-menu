@@ -1,48 +1,78 @@
 import { useEffect, useState, useCallback } from "react";
-import { getMenu, subscribeToMenuChanges } from "../services/menuService";
+import { supabase } from "../lib/supabaseClient";
 
-/**
- * The single point where UI meets the data layer. Components never import
- * src/services/menuService.js directly — they call this hook.
- *
- * Also subscribes to Supabase Realtime: any change to categories/dishes/
- * portions (from the admin panel, or another customer's device, or the
- * admin panel's own SQL editor) triggers a refetch here automatically —
- * this is what makes edits show up on the customer site with no manual
- * refresh.
- */
 export function useMenu() {
   const [categories, setCategories] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const load = useCallback(() => {
-    return getMenu()
-      .then((result) => {
-        setCategories(result.categories);
-        setDishes(result.dishes);
-        setError(null);
-      })
-      .catch((err) => setError(err));
+  // Функция загрузки данных
+  const fetchMenu = useCallback(async () => {
+    try {
+      // Запрашиваем категории и блюда без сортировки по несуществующему полю
+const { data: categoriesData, error: catErr } = await supabase
+  .from("categories")
+  .select("*, dishes(*, portions(*))");
+
+      if (catErr) throw catErr;
+
+      // Вытаскиваем все блюда в плоский массив для удобного поиска
+      const allDishes = categoriesData.flatMap((cat) => cat.dishes || []);
+
+      setCategories(categoriesData || []);
+      setDishes(allDishes);
+      setError(null);
+    } catch (err) {
+      console.error("Ошибка загрузки меню:", err);
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
+    fetchMenu();
 
-    load().finally(() => {
-      if (!cancelled) setLoading(false);
-    });
+    // Генерируем уникальный ID канала, чтобы React StrictMode не вызивал ошибку повторной подписки
+    const channelId = `menu-realtime-${Math.random().toString(36).substring(2, 9)}`;
+    const channel = supabase.channel(channelId);
 
-    const unsubscribe = subscribeToMenuChanges(() => {
-      load();
-    });
+    // Сначала ВСЕ .on(), и только в самом конце .subscribe()
+    channel
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "dishes" },
+        () => {
+          fetchMenu();
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "categories" },
+        () => {
+          fetchMenu();
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "portions" },
+        () => {
+          fetchMenu();
+        }
+      )
+      .subscribe();
 
     return () => {
-      cancelled = true;
-      unsubscribe();
+      supabase.removeChannel(channel);
     };
-  }, [load]);
+  }, [fetchMenu]);
 
-  return { categories, dishes, loading, error };
+  return {
+    categories,
+    dishes,
+    loading,
+    error,
+    refetch: fetchMenu,
+  };
 }

@@ -1,4 +1,5 @@
 import { supabase } from "../lib/supabaseClient";
+import imageCompression from "browser-image-compression";
 
 /**
  * The write layer used only by the admin panel. Kept separate from
@@ -91,10 +92,25 @@ const PHOTO_BUCKET = "dish-photos";
  * into a dish's `photo` field.
  */
 export async function uploadDishPhoto(file) {
-  const ext = file.name.split(".").pop() || "jpg";
+  // 1. Сжимаем фото до ~400КБ перед отправкой (чтобы админка не лагала)
+  const options = {
+    maxSizeMB: 0.4,
+    maxWidthOrHeight: 1200,
+    useWebWorker: true,
+  };
+
+  let fileToUpload = file;
+  try {
+    fileToUpload = await imageCompression(file, options);
+  } catch (e) {
+    console.warn("Не удалось сжать картинку, загружаем оригинал", e);
+  }
+
+  // 2. Загружаем в Supabase Storage
+  const ext = fileToUpload.name?.split(".").pop() || "jpg";
   const path = `${crypto.randomUUID()}.${ext}`;
 
-  const { error } = await supabase.storage.from(PHOTO_BUCKET).upload(path, file, {
+  const { error } = await supabase.storage.from(PHOTO_BUCKET).upload(path, fileToUpload, {
     cacheControl: "3600",
     upsert: false,
   });

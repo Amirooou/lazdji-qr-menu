@@ -29,7 +29,6 @@ function AdminShell() {
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", background: "#fff", borderBottom: "1px solid #E7E5E4" }}>
-        <Wordmark size={22} />
         <button
           onClick={() => signOut()}
           style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 12px", borderRadius: 10, border: "1px solid #E7E5E4", background: "#fff", color: "#78716C", fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}

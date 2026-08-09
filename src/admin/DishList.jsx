@@ -8,6 +8,92 @@ import { fmtPrice } from "../utils/format";
 import ConfirmDialog from "./ConfirmDialog";
 import CategoryManager from "./CategoryManager";
 
+// Выносим карточку блюда в отдельный компонент для оптимистичного UI
+function DishItem({ dish, onEdit, onDelete, showToast }) {
+  // Локальное состояние для МОМЕНТАЛЬНОГО переключения галочки
+  const [isAvailable, setIsAvailable] = useState(dish.available);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // Мгновенный переключатель стоп-листа
+  const handleToggle = async (e) => {
+    e.stopPropagation();
+    const nextState = !isAvailable;
+    
+    // 1. Меняем UI моментально без ожидания ответа сервера!
+    setIsAvailable(nextState);
+    setIsUpdating(true);
+
+    try {
+      await setDishAvailability(dish.id, nextState);
+    } catch (err) {
+      // 2. Если произошла ошибка сети — откатываем галочку обратно
+      setIsAvailable(!nextState);
+      showToast("Ошибка обновления статуса", "error");
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        background: "#fff",
+        border: "1px solid #E7E5E4",
+        borderRadius: 14,
+        padding: 10,
+        marginBottom: 8,
+        opacity: isAvailable ? 1 : 0.55,
+        transition: "opacity 0.2s ease",
+      }}
+    >
+      <div style={{ width: 52, height: 52, borderRadius: 10, overflow: "hidden", background: "#F5F5F4", flexShrink: 0 }}>
+        {dish.photo && <img src={dish.photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
+      </div>
+
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+          <h3 style={{ fontSize: 13.5, fontWeight: 650, color: "#1C1917", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {dish.title_ru}
+          </h3>
+          {dish.is_signature && <Star size={11} color="#D97706" style={{ flexShrink: 0 }} />}
+          {dish.is_spicy && <Flame size={11} color="#C83E2B" style={{ flexShrink: 0 }} />}
+          {dish.is_new && <Sparkles size={11} color="#059669" style={{ flexShrink: 0 }} />}
+        </div>
+        <p style={{ fontSize: 12.5, color: "#78716C", margin: "2px 0 0" }}>
+          {dish.portions?.length ? `от ${fmtPrice(Math.min(...dish.portions.map((p) => p.price)))}` : fmtPrice(dish.price)}
+        </p>
+      </div>
+
+      {/* Быстрый тумблер с мгновенным откликом */}
+      <label style={{ display: "flex", alignItems: "center", flexShrink: 0, cursor: "pointer", padding: "4px" }}>
+        <input
+          type="checkbox"
+          checked={isAvailable}
+          disabled={isUpdating}
+          onChange={handleToggle}
+          style={{ width: 20, height: 20, accentColor: "#C83E2B", cursor: "pointer" }}
+        />
+      </label>
+
+      <button
+        onClick={() => onEdit(dish)}
+        style={{ width: 32, height: 32, borderRadius: 8, border: "none", background: "#F5F5F4", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+      >
+        <Pencil size={14} color="#57534E" />
+      </button>
+      <button
+        onClick={() => onDelete(dish)}
+        style={{ width: 32, height: 32, borderRadius: 8, border: "none", background: "#FEF2F2", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+      >
+        <Trash2 size={14} color="#C83E2B" />
+      </button>
+    </div>
+  );
+}
+
 export default function DishList({ onEdit, onNew }) {
   const { categories, dishes, loading } = useMenu();
   const { showToast } = useApp();
@@ -15,11 +101,14 @@ export default function DishList({ onEdit, onNew }) {
   const [showCategories, setShowCategories] = useState(false);
 
   const handleDelete = async () => {
-    await deleteDish(pendingDelete.id);
-    showToast("Блюдо удалено");
-    setPendingDelete(null);
-    // No manual refetch needed — the realtime subscription in useMenu()
-    // picks up the delete and updates this list automatically.
+    try {
+      await deleteDish(pendingDelete.id);
+      showToast("Блюдо удалено");
+    } catch (e) {
+      showToast("Ошибка при удалении", "error");
+    } finally {
+      setPendingDelete(null);
+    }
   };
 
   if (loading) {
@@ -47,44 +136,13 @@ export default function DishList({ onEdit, onNew }) {
               {cat.name_ru}
             </h2>
             {items.map((dish) => (
-              <div
+              <DishItem
                 key={dish.id}
-                style={{ display: "flex", alignItems: "center", gap: 12, background: "#fff", border: "1px solid #E7E5E4", borderRadius: 14, padding: 10, marginBottom: 8, opacity: dish.available ? 1 : 0.55 }}
-              >
-                <div style={{ width: 52, height: 52, borderRadius: 10, overflow: "hidden", background: "#F5F5F4", flexShrink: 0 }}>
-                  {dish.photo && <img src={dish.photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
-                </div>
-
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                    <h3 style={{ fontSize: 13.5, fontWeight: 650, color: "#1C1917", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      {dish.title_ru}
-                    </h3>
-                    {dish.is_signature && <Star size={11} color="#D97706" style={{ flexShrink: 0 }} />}
-                    {dish.is_spicy && <Flame size={11} color="#C83E2B" style={{ flexShrink: 0 }} />}
-                    {dish.is_new && <Sparkles size={11} color="#059669" style={{ flexShrink: 0 }} />}
-                  </div>
-                  <p style={{ fontSize: 12.5, color: "#78716C", margin: "2px 0 0" }}>
-                    {dish.portions?.length ? `от ${fmtPrice(Math.min(...dish.portions.map((p) => p.price)))}` : fmtPrice(dish.price)}
-                  </p>
-                </div>
-
-                <label style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                  <input
-                    type="checkbox"
-                    checked={dish.available}
-                    onChange={() => setDishAvailability(dish.id, !dish.available)}
-                    style={{ width: 18, height: 18 }}
-                  />
-                </label>
-
-                <button onClick={() => onEdit(dish)} style={{ width: 32, height: 32, borderRadius: 8, border: "none", background: "#F5F5F4", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Pencil size={14} color="#57534E" />
-                </button>
-                <button onClick={() => setPendingDelete(dish)} style={{ width: 32, height: 32, borderRadius: 8, border: "none", background: "#FEF2F2", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Trash2 size={14} color="#C83E2B" />
-                </button>
-              </div>
+                dish={dish}
+                onEdit={onEdit}
+                onDelete={(d) => setPendingDelete(d)}
+                showToast={showToast}
+              />
             ))}
           </section>
         );
@@ -97,6 +155,7 @@ export default function DishList({ onEdit, onNew }) {
           display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "15px 0",
           borderRadius: 16, background: "#C83E2B", color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer",
           boxShadow: "0 8px 24px rgba(200,62,43,0.3)",
+          zIndex: 50,
         }}
       >
         <Plus size={17} strokeWidth={2.5} /> Добавить блюдо
