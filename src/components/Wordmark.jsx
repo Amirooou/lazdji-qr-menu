@@ -1,4 +1,4 @@
-import logoFile from "../assets/logonew.png";
+import logoFile from "../assets/logoword.png";
 
 export default function Wordmark({ size = 220, style = {} }) {
   return (
@@ -6,14 +6,15 @@ export default function Wordmark({ size = 220, style = {} }) {
       src={logoFile}
       alt="LAZDJI"
       style={{
-        width: "100%",
-        maxWidth: typeof size === "number" ? `${size}px` : size,
-        height: "auto",
-        objectFit: "contain",
-        display: "block",
-        margin: "0 auto",
-        ...style,
-      }}
+  maxWidth: "300px",
+  width: "100%",
+  height: "auto",
+  objectFit: "contain",
+  display: "block",
+  margin: "0 auto",
+  marginTop: "-15px",
+  ...style,
+}}
     />
   );
-}
+}  
