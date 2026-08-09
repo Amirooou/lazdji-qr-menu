@@ -173,13 +173,13 @@
   display: none;
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -10px;
   transform: translateX(-50%);
   z-index: 2;
   pointer-events: none;
   user-select: none;
-  width: min(100vw, 680px);
-  height: clamp(210px, 36vh, 360px);
+  width: min(100vw, 760px);
+  height: clamp(240px, 40vh, 420px);
   object-fit: contain;
   object-position: center bottom;
 }
@@ -219,8 +219,8 @@
 
   .hero__mobileOrnament {
     display: block;
-    width: min(100vw, 560px);
-    height: clamp(220px, 38vh, 380px);
+    width: min(100vw, 640px);
+    height: clamp(250px, 42vh, 440px);
   }
 }
 
