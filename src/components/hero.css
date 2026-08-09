@@ -207,6 +207,9 @@
 
   .hero__mobileOrnament {
     display: block;
+    width: min(100vw, 640px);
+    height: clamp(250px, 42vh, 440px);
+    bottom: -26px;
   }
 
   .hero__underlogoAsset {
@@ -215,12 +218,6 @@
 
   .hero__corner {
     display: none;
-  }
-
-  .hero__mobileOrnament {
-    display: block;
-    width: min(100vw, 640px);
-    height: clamp(250px, 42vh, 440px);
   }
 }
 
@@ -248,14 +245,4 @@
     height: clamp(220px, 24vw, 340px);
   }
 
-.hero__mobileOrnament {
-  position: absolute;
-  left: 50%;
-  bottom: -70px;      /* опускает ниже */
-  transform: translateX(-50%);
-  width: 120%;        /* больше экрана */
-  max-width: none;
-  z-index: 2;
-  pointer-events: none;
-}
 }

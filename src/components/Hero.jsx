@@ -47,7 +47,6 @@ export default function Hero({ onScrollToMenu }) {
           <Receipt size={18} strokeWidth={2} />
           <span>СМОТРЕТЬ МЕНЮ</span>
         </button>
-
       </div>
 
       <img
