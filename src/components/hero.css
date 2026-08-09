@@ -169,6 +169,17 @@
   transform: scale(0.98);
 }
 
+.hero__mobileOrnament {
+  display: none;
+  pointer-events: none;
+  user-select: none;
+  width: clamp(130px, 26vw, 220px);
+  margin-top: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
+}
+
 @media (max-width: 767px) {
   .hero__cluster {
     width: clamp(330px, 88vw, 460px);
@@ -188,6 +199,10 @@
   .hero__footer {
     width: min(88vw, 310px);
     bottom: clamp(26px, 4.3vh, 48px);
+  }
+
+  .hero__mobileOrnament {
+    display: block;
   }
 
   .hero__underlogoAsset {

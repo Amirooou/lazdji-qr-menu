@@ -2,6 +2,7 @@ import { Receipt } from "lucide-react";
 import clutchChilli from "../assets/clutchchilli.png";
 import logoWord from "../assets/logonew.png";
 import underLogo from "../assets/underlogo.png";
+import ornamentGold from "../assets/ornamentgold.jpg";
 import rightUzor from "../assets/right_uzor.png";
 import "./hero.css";
 
@@ -46,6 +47,13 @@ export default function Hero({ onScrollToMenu }) {
           <Receipt size={18} strokeWidth={2} />
           <span>СМОТРЕТЬ МЕНЮ</span>
         </button>
+
+        <img
+          src={ornamentGold}
+          alt=""
+          aria-hidden="true"
+          className="hero__mobileOrnament"
+        />
 
       </div>
 
