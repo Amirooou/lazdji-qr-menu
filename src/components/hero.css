@@ -1,16 +1,23 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: 600px;
-  height: 100dvh;
+  
+  /* Три уровня защиты высоты: */
+  height: 100vh; /* Фолбек */
+  height: 100dvh; /* Современный стандарт */
+  min-height: 600px; /* Защита контента */
+  
+  /* ХАК ДЛЯ IOS SAFARI, ЧТОБЫ НЕ БЫЛО ДЫР СНИЗУ */
+  max-height: -webkit-fill-available;
+  
   overflow: hidden;
   box-sizing: border-box;
   isolation: isolate;
+  
   background:
     linear-gradient(180deg, rgba(2, 0, 0, 0.88) 0%, rgba(4, 0, 0, 0.82) 100%),
     url("../assets/leather_background.jpg") center/cover no-repeat;
 }
-
 .hero::before,
 .hero::after {
   content: "";
