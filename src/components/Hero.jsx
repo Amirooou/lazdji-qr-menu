@@ -2,7 +2,6 @@ import { Receipt } from "lucide-react";
 import clutchChilli from "../assets/clutchchilli.png";
 import logoWord from "../assets/logonew.png";
 import underLogo from "../assets/underlogo.png";
-import rightUzor from "../assets/right_uzor.png";
 import "./hero.css";
 
 export default function Hero({ onScrollToMenu }) {
@@ -17,10 +16,6 @@ export default function Hero({ onScrollToMenu }) {
 
       <div className="hero__smoke hero__smoke--left" aria-hidden="true" />
       <div className="hero__smoke hero__smoke--right" aria-hidden="true" />
-
-      <div className="hero__corner hero__corner--right" aria-hidden="true">
-        <img src={rightUzor} alt="" className="hero__cornerArt" />
-      </div>
 
       <div className="hero__content">
         <img
