@@ -48,14 +48,14 @@ export default function Hero({ onScrollToMenu }) {
           <span>СМОТРЕТЬ МЕНЮ</span>
         </button>
 
-        <img
-          src={ornamentGold}
-          alt=""
-          aria-hidden="true"
-          className="hero__mobileOrnament"
-        />
-
       </div>
+
+      <img
+        src={ornamentGold}
+        alt=""
+        aria-hidden="true"
+        className="hero__mobileOrnament"
+      />
 
       <div className="hero__corner hero__corner--right" aria-hidden="true">
         <img src={rightUzor} alt="" className="hero__cornerArt" />

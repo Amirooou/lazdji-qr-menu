@@ -171,13 +171,17 @@
 
 .hero__mobileOrnament {
   display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 2;
   pointer-events: none;
   user-select: none;
-  width: clamp(130px, 26vw, 220px);
-  margin-top: 14px;
-  margin-left: auto;
-  margin-right: auto;
+  width: min(100vw, 680px);
+  height: clamp(210px, 36vh, 360px);
   object-fit: contain;
+  object-position: center bottom;
 }
 
 @media (max-width: 767px) {
@@ -210,8 +214,13 @@
   }
 
   .hero__corner {
-    width: clamp(180px, 42vw, 240px);
-    height: clamp(180px, 42vw, 240px);
+    display: none;
+  }
+
+  .hero__mobileOrnament {
+    display: block;
+    width: min(100vw, 560px);
+    height: clamp(220px, 38vh, 380px);
   }
 }
 
@@ -237,5 +246,9 @@
   .hero__corner {
     width: clamp(220px, 24vw, 340px);
     height: clamp(220px, 24vw, 340px);
+  }
+
+  .hero__mobileOrnament {
+    display: none;
   }
 }
