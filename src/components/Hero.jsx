@@ -2,6 +2,7 @@ import { Receipt } from "lucide-react";
 import clutchChilli from "../assets/clutchchilli.png";
 import logoWord from "../assets/logonew.png";
 import underLogo from "../assets/underlogo.png";
+import rightUzor from "../assets/right_uzor.png";
 import "./hero.css";
 
 export default function Hero({ onScrollToMenu }) {
@@ -46,6 +47,10 @@ export default function Hero({ onScrollToMenu }) {
           <span>СМОТРЕТЬ МЕНЮ</span>
         </button>
 
+      </div>
+
+      <div className="hero__corner hero__corner--right" aria-hidden="true">
+        <img src={rightUzor} alt="" className="hero__cornerArt" />
       </div>
 
     </section>
