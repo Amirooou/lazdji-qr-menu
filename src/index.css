@@ -29,6 +29,12 @@
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* Аппаратное ускорение для карточек */
+.card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
@@ -55,12 +61,6 @@
   filter: drop-shadow(10px 20px 30px rgba(0, 0, 0, 0.9));
 }
 
-/* Very light "floating" drift for the hero's decorative chilies — a slow
-   sway, not a spin. Each pepper sets its own --dx/--dy/--dur/--delay via
-   inline style, so this one rule drives all of them without needing a
-   keyframe per instance. Uses the standalone `translate`/`rotate` CSS
-   properties (not `transform`) specifically so this animation only ever
-   touches position, leaving each pepper's own base rotation alone. */
 @keyframes chiliDrift {
   0%, 100% { translate: 0 0; }
   50% { translate: var(--dx, 6px) var(--dy, 8px); }
@@ -73,12 +73,6 @@
   .chili-drift { animation: none; }
 }
 
-/* Use the STABLE (small) viewport height, not the dynamic one. iOS/Android
-   address bars hide and show while the person scrolls; "100dvh" changes
-   live as that happens, which reflows the whole page mid-scroll and is
-   exactly what made scrolling feel like it "fights back" and snaps up.
-   "100svh" is fixed to the smallest the viewport ever is, so this section's
-   height never changes once it has rendered. */
 .hero-viewport { min-height: 100vh; }
 @supports (min-height: 100svh) {
   .hero-viewport { min-height: 100svh; }

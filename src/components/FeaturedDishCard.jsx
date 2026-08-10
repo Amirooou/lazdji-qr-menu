@@ -9,11 +9,17 @@ export default function FeaturedDishCard({ item, onTap }) {
   const { lang, t, addToCart, isAvailable, admin, toggleAvailability, showToast, orderMode } = useApp();
   const [pi, setPi] = useState(0);
   const off = !isAvailable(item);
+
+  // Скрываем фирменные карточки из стоп-листа для обычных гостей
+  if (off && !admin) {
+    return null;
+  }
+
   const name = lang === "ru" ? item.title_ru : item.title_kz;
   const desc = lang === "ru" ? item.description_ru : item.description_kz;
 
   return (
-    <div style={{ padding: "0 16px 12px" }}>
+    <div className="card" style={{ padding: "0 16px 12px" }}>
       <div
         style={{
           position: "relative", borderRadius: 20, border: `1px solid ${GOLD}4D`,
@@ -22,8 +28,6 @@ export default function FeaturedDishCard({ item, onTap }) {
           boxShadow: "0 4px 14px rgba(0,0,0,0.4)",
         }}
       >
-        {/* Gold ornamental corner flourishes, a touch larger than the
-            standard row cards since this is the centerpiece of the category. */}
         {["top left", "top right", "bottom left", "bottom right"].map((pos) => (
           <OrnamentalCorner key={pos} corner={pos} size={26} />
         ))}
@@ -34,7 +38,7 @@ export default function FeaturedDishCard({ item, onTap }) {
             style={{
               position: "absolute", right: 12, top: 12, zIndex: 10, display: "flex", alignItems: "center", gap: 4,
               padding: "6px 10px", borderRadius: 8, fontSize: 11, fontWeight: 700, border: "none", cursor: "pointer",
-              background: off ? FLAME : "rgba(0,0,0,0.6)", color: off ? "#fff" : GOLD, backdropFilter: "blur(8px)",
+              background: off ? FLAME : "rgba(20,8,9,0.92)", color: off ? "#fff" : GOLD,
             }}
           >
             <Ban size={11} /> {t("toggleStop")}
@@ -50,10 +54,10 @@ export default function FeaturedDishCard({ item, onTap }) {
 
         <div onClick={() => !off && onTap(item)} style={{ cursor: "pointer" }}>
           <div style={{ position: "relative", height: 220, overflow: "hidden", background: "#1A0D0B" }}>
-            <img src={item.photo} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src={item.photo} alt={name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)" }} />
             <div style={{ position: "absolute", bottom: 12, left: 12, display: "flex", gap: 6 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "4px 8px", borderRadius: 6, background: "rgba(20,8,9,0.85)", fontSize: 11, fontWeight: 600, color: GOLD, backdropFilter: "blur(8px)", border: `1px solid ${GOLD}55` }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "4px 8px", borderRadius: 6, background: "rgba(20,8,9,0.92)", fontSize: 11, fontWeight: 600, color: GOLD, border: `1px solid ${GOLD}55` }}>
                 <Star size={11} strokeWidth={2.5} color={GOLD} /> {t("signature")}
               </span>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "4px 8px", borderRadius: 6, background: FLAME, fontSize: 11, fontWeight: 600, color: "#fff" }}>

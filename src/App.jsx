@@ -18,7 +18,7 @@ import { leatherBackgroundStyle, GOLD, CREAM } from "./theme";
 const FALLBACK_BAR_HEIGHT = 52;
 
 function MenuApp() {
-  const { lang, admin, t, orderMode } = useApp();
+  const { lang, admin, t, orderMode, isAvailable } = useApp();
   const { categories, dishes, loading, error } = useMenu();
 
   const [activeCat, setActiveCat] = useState(null);
@@ -29,9 +29,13 @@ function MenuApp() {
   const menuRef = useRef(null);
   const categoryBarRef = useRef(null);
 
+  // Скрываем категории, где нет доступных блюд (если пользователь не админ)
   const visibleCategories = useMemo(
-    () => categories.filter((cat) => dishes.some((d) => d.category_id === cat.id)),
-    [categories, dishes]
+    () =>
+      categories.filter((cat) =>
+        dishes.some((d) => d.category_id === cat.id && (admin || isAvailable(d)))
+      ),
+    [categories, dishes, admin, isAvailable]
   );
 
   const dishesByCategory = useMemo(() => {
@@ -93,21 +97,18 @@ function MenuApp() {
 
   return (
     <div style={leatherBackgroundStyle()}>
-      {/* Hero показываем ВСЕГДА, не дожидаясь загрузки меню */}
+      {/* Hero показываем ВСЕГДА */}
       <Hero onScrollToMenu={scrollToMenu} />
 
       <div ref={menuRef}>
-        {/* Состояние ошибки подключения */}
         {error ? (
           <ConnectionError message={error.message} />
         ) : loading ? (
-          /* Состояние загрузки блюд под Hero */
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "60px 20px", color: GOLD }}>
             <Loader2 className="animate-spin" size={28} style={{ marginBottom: 12 }} />
             <span style={{ fontSize: 13, color: CREAM, opacity: 0.8 }}>Загружаем меню LAZDJI...</span>
           </div>
         ) : (
-          /* Контент меню */
           <>
             <Header onWaiter={() => setShowWaiter(true)} />
             <CategoryBar ref={categoryBarRef} categories={visibleCategories} active={activeCat} onSelect={scrollToCategory} />

@@ -8,16 +8,19 @@ import { GOLD, GOLD_DIM, FLAME, DARK_LEATHER_DEEP } from "../theme";
 export default function MenuItemRow({ item, onTap }) {
   const { lang, t, addToCart, isAvailable, admin, toggleAvailability, showToast, orderMode } = useApp();
   const off = !isAvailable(item);
-  // Если блюда нет в наличии И пользователь не админ — ничего не рендерим
-if (off && !admin) {
-  return null;
-}
+
+  // Скрываем блюда из стоп-листа для обычных гостей
+  if (off && !admin) {
+    return null;
+  }
+
   const name = lang === "ru" ? item.title_ru : item.title_kz;
   const desc = lang === "ru" ? item.description_ru : item.description_kz;
   const price = dishDisplayPrice(item);
 
   return (
     <div
+      className="card"
       style={{
         position: "relative", margin: "0 16px 10px", borderRadius: 16,
         border: `1px solid ${GOLD}40`, background: "linear-gradient(155deg, #3A1E17 0%, #241210 100%)",
@@ -25,7 +28,7 @@ if (off && !admin) {
         boxShadow: "0 3px 10px rgba(0,0,0,0.35)",
       }}
     >
-      {/* Gold ornamental corner flourishes — not a plain square bracket. */}
+      {/* Gold ornamental corner flourishes */}
       {["top left", "top right", "bottom left", "bottom right"].map((pos) => (
         <OrnamentalCorner key={pos} corner={pos} size={20} />
       ))}
