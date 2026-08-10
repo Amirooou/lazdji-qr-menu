@@ -8,6 +8,10 @@ import { GOLD, GOLD_DIM, FLAME, DARK_LEATHER_DEEP } from "../theme";
 export default function MenuItemRow({ item, onTap }) {
   const { lang, t, addToCart, isAvailable, admin, toggleAvailability, showToast, orderMode } = useApp();
   const off = !isAvailable(item);
+  // Если блюда нет в наличии И пользователь не админ — ничего не рендерим
+if (off && !admin) {
+  return null;
+}
   const name = lang === "ru" ? item.title_ru : item.title_kz;
   const desc = lang === "ru" ? item.description_ru : item.description_kz;
   const price = dishDisplayPrice(item);
